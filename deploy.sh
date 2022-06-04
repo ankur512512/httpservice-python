@@ -8,4 +8,4 @@ echo -e "\n Deployment completed. Sleeping for 10s until IP is assigned to ingre
 sleep 10
 done
 
-echo -e "\n Deployment ready now. Please update your hosts file with this entry:\n `minikube ip` time-hostname.info"
+echo -e "\n Deployment ready now. Please update your hosts file with below entry:\n `minikube ip` time-hostname.info"
