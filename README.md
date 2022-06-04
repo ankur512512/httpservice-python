@@ -61,7 +61,7 @@ Please note that it will automatically wait for the `nginx-ingress-controller` p
 ```bash
 ./bootstrap.sh
 ```
-It should return in something like this:
+It should return something like this:
 
 ```bash
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -96,6 +96,27 @@ Please issue below command to automatically deploy the Kubernetes manifests on y
 ./deploy.sh
 ```
 
+You will see something similar to this:
+
+```bash
+deployment.apps/python-deployment created
+horizontalpodautoscaler.autoscaling/python-hpa created
+ingress.networking.k8s.io/python-ingress created
+service/python-service created
+
+ Deployment completed. Sleeping for 10s until IP is assigned to ingress resource...
+
+ Deployment completed. Sleeping for 10s until IP is assigned to ingress resource...
+
+ Deployment completed. Sleeping for 10s until IP is assigned to ingress resource...
+
+ Deployment completed. Sleeping for 10s until IP is assigned to ingress resource...
+
+ Deployment ready now. Please update your hosts file with below entry:
+ 
+ 192.168.49.2 time-hostname.info
+ ```
+
 As you can see, in the end it asked you to do a host file entry as we are not using `LoadBalancer` services because we are using a `minikube` cluster. You can either do that by yourself manually or issue below command to take care of that:
 
 ```bash
@@ -106,11 +127,26 @@ echo "`minikube ip` time-hostname.info" | sudo tee -a /etc/hosts
 
 To test your application from command line itself using curl, use below commands:
 
+For timestamp:
+
 ```bash
 curl time-hostname.info/timestamp
-
-
-curl time-hostname.info/hostname
-
 ```
 
+It will return the timestamp like this:
+
+```bash
+1654327983.8266492
+```
+
+Then, for hostname:
+
+```bash
+curl time-hostname.info/hostname
+```
+
+It will return hostname (in our case, pod's name) like this:
+
+```bash
+"python-deployment-7b7954c4fc-dghlf"
+```
