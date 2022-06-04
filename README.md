@@ -61,6 +61,32 @@ Please note that it will automatically wait for the `nginx-ingress-controller` p
 ```bash
 ./bootstrap.sh
 ```
+It should return in something like this:
+
+```bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 69.2M  100 69.2M    0     0   218M      0 --:--:-- --:--:-- --:--:--  218M
+😄  minikube v1.25.2 on Debian 11.3 (amd64)
+✨  Using the docker driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🏃  Updating the running docker "minikube" container ...
+🐳  Preparing Kubernetes v1.23.3 on Docker 20.10.12 ...
+    ▪ kubelet.housekeeping-interval=5m
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+    ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.4.2
+🌟  The 'metrics-server' addon is enabled
+pod/ingress-nginx-controller-cc8496874-cgxv5 condition met
+```
 
 ### Instructions to deploy the application on minikube
 
