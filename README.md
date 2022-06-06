@@ -18,17 +18,6 @@ This project is tested on below configuration, you might need to do some adjustm
 - `bootstrap.sh` script to bootstrap the `minikube` testing environment with `ingress` addon enabled.
 - `deploy.sh` script to deploy the k8s manifests in one shot on `minikube` kubernetes cluster.
 
-### Common
-
-Please clone this repo and cd into it using below commands:
-
-```bash
-git clone https://github.com/ankur512512/httpservice-python.git
-cd httpservice-python
-```
-
-Execute all the commands given in this README from this directory only.
-
 ### Instructions to build the application
 
 To build the application in a container image, please issue below command:
@@ -62,7 +51,7 @@ Successfully built ec53334da30f
 Successfully tagged httpservice:latest
 ```
 
-I have further tagged and pushed this image to my personal [repository](https://hub.docker.com/repository/docker/ankur512512/httpservice) which is then being used in the Kubernetes cluster deployed in further steps.
+I have further tagged and pushed this image to my personal repository () which is then being used in the Kubernetes cluster deployed in further steps.
 
 ### Instructions to bootstrap the testing environment
 
@@ -95,15 +84,6 @@ It should return something like this:
     ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
 🔎  Verifying ingress addon...
 🌟  The 'ingress' addon is enabled
-serviceaccount/metrics-server created
-clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/system:metrics-server created
-rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
-clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
-clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
-service/metrics-server created
-deployment.apps/metrics-server created
-apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
 pod/ingress-nginx-controller-cc8496874-cgxv5 condition met
 ```
 
@@ -170,11 +150,27 @@ It will return hostname (in our case, pod's name) like this:
 "python-deployment-7b7954c4fc-dghlf"
 ```
 
-As of now, you will see only two replicas. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
+As of now, you will see only one replica. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
 
-Kindly wait for atleast 10-15 mins after sending the load, for HPA to refresh the metrics data and to take action accordingly.
+### Load generation
 
-### Stretch Goals
+If you want to generate some load to test the autoscaling feature, please open a separate terminal window and issue below command:
 
-- Metrics: HPA will monitor the cpu usage and will autoscale the pods accordingly.
-- Image size: I have used the alpine based image for python3 to keep the image size minimum.
+```bash
+kubectl run load-generator  -it --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- python-service:5000/hostname; done"
+```
+
+Wait for around 5 minutes and you will see that replicas will grow from 2 to 3 as the load increases and crosses the 50% threshold.
+
+You can verify using below command:
+
+```bash
+kubectl get hpa
+```
+
+You will see results like this:
+
+```bash
+NAME         REFERENCE                      TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+python-hpa   Deployment/python-deployment   133%/50%   2         3         3          74m
+```
