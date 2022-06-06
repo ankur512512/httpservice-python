@@ -13,8 +13,9 @@ This project is tested on below configuration, you might need to do some adjustm
 ## Project Structure
 
 - `resources` directory contains the application code that will be used by the `Dockerfile`.
+- `metrics-server` directory contains k8s manifest to install everything related to `metrics-server` to collect metrics data from our application.
 - `k8s` directory contains the manifests for deployment, service, ingress and hpa (Horizontal Pod Autoscaler) to be used by Kubernetes.
-- `bootstrap.sh` script to bootstrap the `minikube` testing environment with `ingress` and `metrics-server` addons enabled.
+- `bootstrap.sh` script to bootstrap the `minikube` testing environment with `ingress` addon enabled.
 - `deploy.sh` script to deploy the k8s manifests in one shot on `minikube` kubernetes cluster.
 
 ### Instructions to build the application
@@ -54,7 +55,7 @@ I have further tagged and pushed this image to my personal repository (link) whi
 
 ### Instructions to bootstrap the testing environment
 
-Provided your system already satisfies the `Pre-requisites` requirements stated at the beginning, please issue below command to automatically download, install and start a `minikube` cluster and enable the `ingress` and `metrics-server` addons on it.
+Provided your system already satisfies the `Pre-requisites` requirements stated at the beginning, please issue below command to automatically download, install and start a `minikube` cluster and enable the `ingress` addon on it.
 
 ```bash
 ./bootstrap.sh
@@ -83,8 +84,6 @@ It should return something like this:
     ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
 🔎  Verifying ingress addon...
 🌟  The 'ingress' addon is enabled
-    ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.4.2
-🌟  The 'metrics-server' addon is enabled
 pod/ingress-nginx-controller-cc8496874-cgxv5 condition met
 ```
 
