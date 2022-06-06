@@ -13,7 +13,7 @@ This project is tested on below configuration, you might need to do some adjustm
 ## Project Structure
 
 - `resources` directory contains the application code that will be used by the `Dockerfile`.
-- `k8s` directory contains the manifests for deployment, service and ingress to be used by Kubernetes.
+- `k8s` directory contains the manifests for deployment, service, ingress and hpa (Horizontal Pod Autoscaler) to be used by Kubernetes.
 - `bootstrap.sh` script to bootstrap the `minikube` testing environment with `ingress` and `metrics-server` addons enabled.
 - `deploy.sh` script to deploy the k8s manifests in one shot on `minikube` kubernetes cluster.
 
@@ -56,11 +56,11 @@ I have further tagged and pushed this image to my personal repository (link) whi
 
 Provided your system already satisfies the `Pre-requisites` requirements stated at the beginning, please issue below command to automatically download, install and start a `minikube` cluster and enable the `ingress` and `metrics-server` addons on it.
 
-Please note that it will automatically wait for the `nginx-ingress-controller` pod to get ready, so please wait for the script to complete.
-
 ```bash
 ./bootstrap.sh
 ```
+Please note that it will automatically wait for the `ingress-nginx-controller` pod to get ready, so please wait for the script to complete.
+
 It should return something like this:
 
 ```bash
@@ -151,4 +151,4 @@ It will return hostname (in our case, pod's name) like this:
 "python-deployment-7b7954c4fc-dghlf"
 ```
 
-As of now, you will see only one replica. But if you keep on hitting the api using some script to increase the cpu/memory load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
+As of now, you will see only one replica. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
