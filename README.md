@@ -51,7 +51,7 @@ Successfully built ec53334da30f
 Successfully tagged httpservice:latest
 ```
 
-I have further tagged and pushed this image to my personal repository (link) which is then being used in the Kubernetes cluster deployed in further steps.
+I have further tagged and pushed this image to my personal [repository](https://hub.docker.com/repository/docker/ankur512512/httpservice) which is then being used in the Kubernetes cluster deployed in further steps.
 
 ### Instructions to bootstrap the testing environment
 
