@@ -18,6 +18,17 @@ This project is tested on below configuration, you might need to do some adjustm
 - `bootstrap.sh` script to bootstrap the `minikube` testing environment with `ingress` addon enabled.
 - `deploy.sh` script to deploy the k8s manifests in one shot on `minikube` kubernetes cluster.
 
+### Common Instructions
+
+To use this project, clone this repo and cd into it using below command:
+
+```bash
+git clone https://github.com/ankur512512/httpservice-python.git
+cd httpservice-python
+```
+
+Execute all the further commands given in this README form within this directory only.
+
 ### Instructions to build the application
 
 To build the application in a container image, please issue below command:
