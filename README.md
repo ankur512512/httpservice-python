@@ -171,7 +171,7 @@ If you want to generate some load to test the autoscaling feature, please open a
 kubectl run load-generator  -it --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- python-service:5000/hostname; done"
 ```
 
-Wait for around 5 minutes and you will see that replicas will grow from 2 to 3 as the load increases and crosses the 50% threshold.
+Wait for around 5-15 minutes and you will see that replicas will grow from 2 to 3 as the load increases and crosses the 50% threshold. It is normal for the `hpa` to show `<unknown>/50%` initially in the TARGETS field as it is yet to fetch the metrics from the metrics-server pod.
 
 You can verify using below command:
 
@@ -185,3 +185,8 @@ You will see results like this:
 NAME         REFERENCE                      TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
 python-hpa   Deployment/python-deployment   133%/50%   2         3         3          74m
 ```
+
+### Stretch Goals
+
+- Metrics: CPU usage is used as a metric to scale up/down the application pods using HPA.
+- Image size: Image size is kept small using the alpine version of python3.
