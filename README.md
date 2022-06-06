@@ -6,9 +6,9 @@ HTTP Service written in python3 and flask. Ready to be hosted on k8s with ingres
 This project is tested on below configuration, you might need to do some adjustments if your configuration differs.
 
 - OS: Debian GNU/Linux 11
-- Non-root user with sudo access to install minikube
 - Docker Version: 20.10.5+ (non-root user should be able to use docker commands without sudo)
 - kubectl v1.23+
+- All commands should be run with a non-root user having sudo access to install minikube
 
 ## Project Structure
 
