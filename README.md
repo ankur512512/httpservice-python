@@ -8,7 +8,7 @@ This project is tested on below configuration, you might need to do some adjustm
 - OS: Debian GNU/Linux 11
 - Docker Version: 20.10.5+ (non-root user should be able to use docker commands without sudo)
 - kubectl v1.23+
-- All commands should be run with a non-root user having sudo access to install minikube
+- All commands should be run with a non-root user having sudo root access to install minikube
 
 ## Project Structure
 
