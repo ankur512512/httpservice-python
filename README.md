@@ -172,6 +172,8 @@ It will return hostname (in our case, pod's name) like this:
 
 As of now, you will see only two replicas. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
 
+Kindly wait for atleast 10-15 mins after sending the load, for HPA to refresh the metrics data and to take action accordingly.
+
 ### Stretch Goals
 
 - Metrics: HPA will monitor the cpu usage and will autoscale the pods accordingly.
