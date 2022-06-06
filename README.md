@@ -161,7 +161,7 @@ It will return hostname (in our case, pod's name) like this:
 "python-deployment-7b7954c4fc-dghlf"
 ```
 
-As of now, you will see only one replica. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
+As of now, you will see only two replicas. But if you keep on hitting the api using some script to increase the cpu load. It will automatically scale up the replica set to a maximum of 3 using the `hpa`.
 
 ### Load generation
 
